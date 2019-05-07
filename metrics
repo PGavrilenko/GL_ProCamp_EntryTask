@@ -1,0 +1,38 @@
+#!/usr/bin/python3
+import collections
+import psutil
+import sys
+
+try:
+	metricarg = sys.argv[1]
+except Exception:
+	print('Null arg')
+#else:
+
+if (metricarg == "mem"):
+        #print("RAM")
+        virt_mem = psutil.virtual_memory()
+        swap_mem = psutil.swap_memory()
+        obj = {
+			'1) virtual total:	': virt_mem.total,
+			'2) virtual used:	': virt_mem.used,
+			'3) virtual free:	': virt_mem.free,
+			'4) virtual shared:	': virt_mem.shared,
+			'5) swap total:		': swap_mem.total,
+			'6) swap used:		': swap_mem.used,
+			'7) swap free:		':swap_mem.free
+        }
+elif (metricarg == "cpu"):
+        #print("CPU")
+        sys_cpu = psutil.cpu_times(percpu=False)
+        obj = {
+			'1) cpu system:		': sys_cpu.system,
+			'2) cpu idle:		': sys_cpu.idle,
+			'3) cpu user:		': sys_cpu.user,
+			'4) cpu guest:		': sys_cpu.guest,
+			'5) cpu iowait:		': sys_cpu.iowait,
+			'6) cpu stolen:		': sys_cpu.steal
+        }
+
+for key, value in collections.OrderedDict(sorted(obj.items())).items():
+    print(key, value)
