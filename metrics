@@ -6,8 +6,9 @@ from pprint import pprint as pp
 
 try:
     metricarg = sys.argv[1]
-except Exception:
+except IndexError:
     print('Null arg')
+    raise
 #else:
 
 if (metricarg == "mem"):
