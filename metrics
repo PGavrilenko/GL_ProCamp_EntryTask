@@ -2,37 +2,45 @@
 import collections
 import psutil
 import sys
+from pprint import pprint as pp
 
 try:
-	metricarg = sys.argv[1]
+    metricarg = sys.argv[1]
 except Exception:
-	print('Null arg')
+    print('Null arg')
 #else:
 
 if (metricarg == "mem"):
-        #print("RAM")
-        virt_mem = psutil.virtual_memory()
-        swap_mem = psutil.swap_memory()
-        obj = {
-			'1) virtual total:	': virt_mem.total,
-			'2) virtual used:	': virt_mem.used,
-			'3) virtual free:	': virt_mem.free,
-			'4) virtual shared:	': virt_mem.shared,
-			'5) swap total:		': swap_mem.total,
-			'6) swap used:		': swap_mem.used,
-			'7) swap free:		':swap_mem.free
-        }
+    print("Memory info")
+    virt_mem = psutil.virtual_memory()
+    swap_mem = psutil.swap_memory()
+    obj = {
+        '1) virtual total:	': virt_mem.total,
+	'2) virtual used:	': virt_mem.used,
+	'3) virtual free:	': virt_mem.free,
+	'4) virtual shared:	': virt_mem.shared,
+	'5) swap total:		': swap_mem.total,
+	'6) swap used:		': swap_mem.used,
+	'7) swap free:		':swap_mem.free
+    }
+    print("Top 3 most memory consuming processes: ")
+    pp([(p.pid, p.info) for p in sorted(psutil.process_iter(attrs=['name', 'memory_percent']), key=lambda p: p.info['memory_percent'])][-3:])
+    print("\n")
 elif (metricarg == "cpu"):
-        #print("CPU")
-        sys_cpu = psutil.cpu_times(percpu=False)
-        obj = {
-			'1) cpu system:		': sys_cpu.system,
-			'2) cpu idle:		': sys_cpu.idle,
-			'3) cpu user:		': sys_cpu.user,
-			'4) cpu guest:		': sys_cpu.guest,
-			'5) cpu iowait:		': sys_cpu.iowait,
-			'6) cpu stolen:		': sys_cpu.steal
-        }
+    print("CPU info")
+    sys_cpu = psutil.cpu_times(percpu=False)
+    obj = {
+	'1) cpu system:		': sys_cpu.system,
+	'2) cpu idle:		': sys_cpu.idle,
+	'3) cpu user:		': sys_cpu.user,
+	'4) cpu guest:		': sys_cpu.guest,
+	'5) cpu iowait:		': sys_cpu.iowait,
+	'6) cpu stolen:		': sys_cpu.steal
+    }
+    print("Top 3 processes which consumed the most CPU time: ")
+    pp([(p.pid, p.info['name'], sum(p.info['cpu_times'])) for p in sorted(psutil.process_iter(attrs=['name', 'cpu_times']), key=lambda p: sum(p.info['cpu_times'][:2]))][-3:])
+    print("\n")
 
+print("Total info")
 for key, value in collections.OrderedDict(sorted(obj.items())).items():
     print(key, value)
