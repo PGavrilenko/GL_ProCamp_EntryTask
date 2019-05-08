@@ -33,8 +33,7 @@ Total info
 6) cpu stolen:           0.0
 
 
-№2 Dockerfile
-
+# №2 Dockerfile
 # metric-monitor:0.0.5
 
 Контейнер в котором содержится скрипт на языке Python v3. При запуске контейнера выводится информация about processes running on the host machine from within container environment
