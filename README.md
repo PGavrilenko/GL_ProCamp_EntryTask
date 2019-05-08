@@ -72,10 +72,6 @@ docker run -pid=host malyamkin/metric-monitor:0.0.5 cpu
 docker run give.example.org/of/your/container:v0.2.1 mem
 ```
 
-```shell
-docker run give.example.org/of/your/container:v0.2.1 mem
-```
-
 #### Environment Variables
 
 * `metricarg` - принимает значения "cpu" или "mem"
@@ -86,9 +82,8 @@ docker run give.example.org/of/your/container:v0.2.1 mem
 
 ## Built With
 
-* List the software v0.1.3
-* And the version numbers v2.0.0
-* That are in this container v0.3.2
+* Python v3.5.3
+* psutil v5.6.2
 
 ## Authors
 
