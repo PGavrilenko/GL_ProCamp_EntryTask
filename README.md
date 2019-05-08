@@ -67,4 +67,5 @@ List the different parameters available to your container
 Pavlo Havrylenko
 
 **TODO**
+
 Add `-v /etc/passwd:/usr/src/passwd` in `docker run` command - из файла passwd from hos**t можно resolves uid to username.**
