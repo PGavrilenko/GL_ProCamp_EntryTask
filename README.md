@@ -15,10 +15,10 @@ When the argument is not set - prints the **'Null arg'** message
 
 **Output:** 
 ```
-`CPU info Top 3 processes which consumed the most CPU time:
+CPU info Top 3 processes which consumed the most CPU time:
 [(7,   'rcu_sched', 14.870000000000001),
  (254, 'systemd-journald', 300.86),
- (685, 'python3', 434.04999999999995)]`
+ (685, 'python3', 434.04999999999995)]
 
 Total info
 
@@ -51,6 +51,7 @@ List the different parameters available to your container
 `docker run -pid=host malyamkin/metric-monitor:0.0.5 parameters`
 
 `docker run -pid=host malyamkin/metric-monitor:0.0.5 cpu`
+
 `docker run -pid=host malyamkin/metric-monitor:0.0.5 mem`
 
 **Environment Variables**
@@ -64,6 +65,7 @@ List the different parameters available to your container
  - psutil v5.6.2
  
 **Authors**
+
 Pavlo Havrylenko
 
 **TODO**
